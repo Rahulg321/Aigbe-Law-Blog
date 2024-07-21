@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --mainB: #165679;
+    --accentB: #0f879f;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -32,6 +34,8 @@
   }
 
   .dark {
+    --mainB: #165679;
+    --accentB: #0f879f;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;

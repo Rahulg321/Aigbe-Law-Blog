@@ -1,3 +1,5 @@
+import HeroSection from "@/components/sections/HeroSection";
+import NewsletterSection from "@/components/sections/NewsletterSection";
 import { Button } from "@/components/ui/button";
 import { urlFor } from "@/lib/urlBuilder";
 import { sanityFetch } from "@/sanity/client";
@@ -6,6 +8,7 @@ import { BLOG_QUERYResult, CATEGORY_QUERYResult } from "@/sanity/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import React from "react";
 
 export default async function HomePage() {
   const blogs = await sanityFetch<BLOG_QUERYResult>({
@@ -19,29 +22,9 @@ export default async function HomePage() {
   });
 
   return (
-    <section className="big-container">
-      <div>
-        <h2>All blogs are</h2>
-        {blogs.map((e) => {
-          console.log(e.image?.asset);
-          return (
-            <Link href={`/blog/${e.slug}`} key={e._id}>
-              <h2>{e.title}</h2>
-            </Link>
-          );
-        })}
-      </div>
-
-      <div>
-        <h2>All Categories are</h2>
-        {categories.map((e) => {
-          return (
-            <div key={e._id}>
-              <h4>{e.title}</h4>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+    <React.Fragment>
+      <HeroSection />
+      <NewsletterSection />
+    </React.Fragment>
   );
 }
