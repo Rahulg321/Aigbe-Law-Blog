@@ -10,6 +10,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
     params: {
       slug: params.slug,
     },
+    tags: ["blog"],
   });
 
   return (

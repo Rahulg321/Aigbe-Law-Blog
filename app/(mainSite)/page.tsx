@@ -10,10 +10,12 @@ import { useEffect } from "react";
 export default async function HomePage() {
   const blogs = await sanityFetch<BLOG_QUERYResult>({
     query: BLOG_QUERY,
+    tags: ["blog"],
   });
 
   const categories = await sanityFetch<CATEGORY_QUERYResult>({
     query: CATEGORY_QUERY,
+    tags: ["category"],
   });
 
   return (
