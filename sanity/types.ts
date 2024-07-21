@@ -238,10 +238,74 @@ export type CATEGORY_QUERYResult = Array<{
   date: null;
 }>;
 // Variable: BLOG_QUERY
-// Query: *[_type == "blog" && defined(slug.current)]{_id, name, slug, date}|order(date desc)
+// Query: *[_type == "blog" && defined(slug.current)]{_id, title, "slug":slug.current, "image":featuredImage}|order(date desc)
 export type BLOG_QUERYResult = Array<{
   _id: string;
-  name: null;
-  slug: Slug | null;
-  date: null;
+  title: string | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
 }>;
+// Variable: SINGLE_BLOG_QUERY
+// Query: *[_type == "blog" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  "image": featuredImage,  "author": author->name,  "authorImage": author->image,  publishDate,  categories[]->{    title,    slug  },  tags,  excerpt,  content[]{    ...,    _type == "image" => {      ...,      asset->{        _id,        url      }    }  }}
+export type SINGLE_BLOG_QUERYResult = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  author: null;
+  authorImage: null;
+  publishDate: string | null;
+  categories: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  tags: Array<string> | null;
+  excerpt: string | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset: {
+      _id: string;
+      url: string | null;
+    } | null;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
+} | null;

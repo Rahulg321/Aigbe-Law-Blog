@@ -1,13 +1,27 @@
 import { defineField, defineType } from "sanity";
+import { CalendarIcon, DocumentIcon } from "@sanity/icons";
 
 const BlogSchema = defineType({
   name: "blog",
   title: "Blog",
+  icon: DocumentIcon,
   type: "document",
+  groups: [
+    {
+      name: "descriptive",
+      title: "Descriptive",
+    },
+    {
+      name: "editorial",
+      title: "Editorial",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
+      description: "Enter the title for your blogpost",
       title: "Title",
+      group: "descriptive",
       type: "string",
       validation: (Rule) =>
         Rule.required().max(100).warning("Shorter titles are usually better"),
@@ -17,23 +31,36 @@ const BlogSchema = defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
+      group: "descriptive",
       options: {
         source: "title",
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      //   field will be hidden if the document does not have a name
+      hidden: ({ document }) => {
+        return !document?.title;
+      },
+      validation: (Rule) =>
+        Rule.required().error(
+          "slug required to generate a page on the website"
+        ),
     }),
     defineField({
       name: "featuredImage",
+      group: "descriptive",
+      description:
+        "Upload a featured image for your blogpost for Opengraph and SEO",
       title: "Featured Image",
       type: "image",
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: "author",
+      group: "descriptive",
       title: "Author",
       type: "reference",
       to: { type: "author" },
@@ -42,6 +69,7 @@ const BlogSchema = defineType({
 
     defineField({
       name: "publishDate",
+      group: "descriptive",
       title: "Publish Date",
       type: "datetime",
       validation: (Rule) => Rule.required(),
@@ -49,6 +77,7 @@ const BlogSchema = defineType({
 
     defineField({
       name: "categories",
+      group: "descriptive",
       title: "Categories",
       type: "array",
       of: [{ type: "reference", to: { type: "category" } }],
@@ -59,6 +88,7 @@ const BlogSchema = defineType({
       name: "tags",
       title: "Tags",
       type: "array",
+      group: "descriptive",
       of: [{ type: "string" }],
       options: {
         layout: "tags",
@@ -67,6 +97,7 @@ const BlogSchema = defineType({
 
     defineField({
       name: "excerpt",
+      group: "editorial",
       title: "Excerpt",
       type: "text",
       description: "A short summary of the blog post",
@@ -76,11 +107,37 @@ const BlogSchema = defineType({
     defineField({
       name: "content",
       title: "Content",
+      group: "editorial",
       type: "array",
-      of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
+
+      of: [
+        {
+          type: "block",
+          marks: {
+            decorators: [
+              { title: "Strong", value: "strong" },
+              { title: "Emphasis", value: "em" },
+              { title: "Code", value: "code" },
+              { title: "Underline", value: "underline" },
+              { title: "Strike", value: "strike-through" },
+            ],
+          },
+        },
+        { type: "image", options: { hotspot: true } },
+        {
+          type: "code",
+        },
+      ],
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "categor.title",
+      media: "featuredImage",
+    },
+  },
 });
 
 export default BlogSchema;
