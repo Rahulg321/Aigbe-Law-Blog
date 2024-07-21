@@ -134,7 +134,7 @@ const BlogSchema = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "categor.title",
+      subtitle: "categories[0].title",
       media: "featuredImage",
     },
   },
