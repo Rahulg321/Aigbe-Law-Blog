@@ -15,6 +15,10 @@ const BlogSchema = defineType({
       name: "editorial",
       title: "Editorial",
     },
+    {
+      name: "seo",
+      title: "SEO",
+    },
   ],
   fields: [
     defineField({
@@ -100,8 +104,14 @@ const BlogSchema = defineType({
       group: "editorial",
       title: "Excerpt",
       type: "text",
-      description: "A short summary of the blog post",
-      validation: (Rule) => Rule.required().max(200),
+      description: "A short summary of the blog post for displaying",
+      validation: (Rule) =>
+        Rule.required()
+          .min(100)
+          .max(200)
+          .warning(
+            "For consistency, this summary should be between 100-200 characters"
+          ),
     }),
 
     defineField({
@@ -129,6 +139,30 @@ const BlogSchema = defineType({
         },
       ],
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "metaTitle",
+      title: "Meta Title",
+      group: "seo",
+      type: "string",
+      description: "Enter the meta title for SEO purposes",
+      validation: (Rule) =>
+        Rule.required()
+          .max(60)
+          .warning("Meta titles should be under 60 characters"),
+    }),
+
+    defineField({
+      name: "metaDescription",
+      title: "Meta Description",
+      group: "seo",
+      type: "text",
+      description: "Enter the meta description for SEO purposes",
+      validation: (Rule) =>
+        Rule.required()
+          .min(50)
+          .max(160)
+          .warning("Meta descriptions should be between 50-160 characters"),
     }),
   ],
   preview: {
