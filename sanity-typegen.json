@@ -1,0 +1,5 @@
+{
+  "path": "../destiny-law-blog/sanity/**/*.{ts,tsx,js,jsx}",
+  "schema": "schema.json",
+  "generates": "../destiny-law-blog/sanity/types.ts"
+}
