@@ -6,6 +6,7 @@ const BlogSchema = defineType({
   title: "Blog",
   icon: DocumentIcon,
   type: "document",
+  fieldsets: [{ name: "dates", title: "Dates", options: { columns: 2 } }],
   groups: [
     {
       name: "descriptive",
@@ -76,7 +77,16 @@ const BlogSchema = defineType({
       group: "descriptive",
       title: "Publish Date",
       type: "datetime",
+      fieldset: "dates",
       validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: "updatedAt",
+      title: "Updated At",
+      group: "descriptive",
+      type: "datetime",
+      fieldset: "dates",
     }),
 
     defineField({
@@ -168,8 +178,15 @@ const BlogSchema = defineType({
   preview: {
     select: {
       title: "title",
-      subtitle: "categories[0].title",
-      media: "featuredImage",
+      categories: "categories",
+      image: "featuredImage",
+    },
+    prepare: ({ title, categories, image }) => {
+      return {
+        title,
+        subtitle: categories[0].title,
+        media: image,
+      };
     },
   },
 });

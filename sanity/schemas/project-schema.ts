@@ -1,6 +1,6 @@
 // ./schemas/person.js
 
-const PersonSchema = {
+const ProjectSchema = {
   name: "project",
   title: "Project",
   type: "document",
@@ -26,4 +26,4 @@ const PersonSchema = {
   ],
 };
 
-export default PersonSchema;
+export default ProjectSchema;

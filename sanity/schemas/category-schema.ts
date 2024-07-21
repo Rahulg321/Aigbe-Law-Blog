@@ -1,8 +1,10 @@
-import { defineType, defineField } from "sanity";
+import { defineField, defineType } from "sanity";
+import { TagIcon } from "@sanity/icons";
 
-const categorySchema = defineType({
+const CategorySchema = defineType({
   name: "category",
   title: "Category",
+  icon: TagIcon,
   type: "document",
   fields: [
     defineField({
@@ -11,17 +13,30 @@ const categorySchema = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
-
     defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
         source: "title",
+        maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+      description: "A short description of the category",
+    }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "description",
+      media: "icon",
+    },
+  },
 });
 
-export default categorySchema;
+export default CategorySchema;
