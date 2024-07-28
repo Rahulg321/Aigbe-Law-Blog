@@ -24,6 +24,18 @@ const CategorySchema = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "createdAt",
+      title: "Created At",
+      type: "datetime",
+      options: {
+        dateFormat: "YYYY-MM-DD",
+        timeFormat: "HH:mm",
+        timeStep: 15,
+      },
+      initialValue: () => new Date().toISOString(),
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "text",

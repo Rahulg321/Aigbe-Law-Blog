@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 
 export const AUTHOR_QUERY = groq`*[_type == "author" && defined(slug.current)]{_id, name, slug, date}|order(date desc)`;
 
-export const CATEGORY_QUERY = groq`*[_type == "category" && defined(slug.current)]{_id, title, slug}|order(date desc)`;
+export const CATEGORY_QUERY = groq`*[_type == "category" && defined(slug.current)]{_id, title, slug, createdAt}|order(date desc)`;
 
 // write a query to fetch blogs by category
 export const BLOG_BY_CATEGORY = groq`

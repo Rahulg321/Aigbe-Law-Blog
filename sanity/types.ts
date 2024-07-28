@@ -230,11 +230,12 @@ export type AUTHOR_QUERYResult = Array<{
   date: null;
 }>;
 // Variable: CATEGORY_QUERY
-// Query: *[_type == "category" && defined(slug.current)]{_id, title, slug}|order(date desc)
+// Query: *[_type == "category" && defined(slug.current)]{_id, title, slug, createdAt}|order(date desc)
 export type CATEGORY_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
+  createdAt: null;
 }>;
 // Variable: BLOG_BY_CATEGORY
 // Query: *[_type == "blog" && category->slug.current == $slug]

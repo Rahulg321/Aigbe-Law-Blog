@@ -192,7 +192,10 @@ export async function generateMetadata({
   let { title, metaDescription, featuredImage, _createdAt, slug, excerpt } =
     blogpost;
 
-  let ogImage = urlFor(featuredImage).width(1200).height(630).url();
+  let ogImage = featuredImage
+    ? urlFor(featuredImage).width(1200).height(630).url()
+    : null;
+
   console.log("og image", ogImage);
 
   return {
@@ -204,17 +207,13 @@ export async function generateMetadata({
       type: "article",
       publishedTime: _createdAt,
       url: `https://aigbe-law-blog.vercel.app/blog/${slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
+      images: ogImage ? [{ url: ogImage }] : [],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: metaDescription || excerpt,
-      images: [ogImage],
+      images: ogImage ? [ogImage] : [],
     },
   };
 }
