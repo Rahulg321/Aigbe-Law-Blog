@@ -12,8 +12,8 @@ import Logo from "@/public/white_logo.png";
 
 const Footer = () => {
   return (
-    <footer className=" container bg-mainB">
-      <div className="grid grid-cols-4 block-space gap-4 border-b-2 border-gray-200/20">
+    <footer className=" bg-mainB">
+      <div className="grid container grid-cols-4 block-space gap-4 border-b-2 border-gray-200/20">
         <div className="p-4">
           <Image src={Logo} alt="" />
         </div>

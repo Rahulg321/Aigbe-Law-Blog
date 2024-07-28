@@ -5,21 +5,35 @@ import { FaLocationDot } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import CategoryAlphabet from "./CategoryAlphabet";
 import Link from "next/link";
+import { IoCall } from "react-icons/io5";
+import { FaQuestion } from "react-icons/fa";
 
 const Header = () => {
   return (
-    <div className="relative">
+    <div className="">
       <header className="">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 block-space-mini items-center big-container">
           <div>
-            <Image src={Logo} alt="" />
+            <Image src={Logo} alt="" width={350} height={100} />
           </div>
-          <HeaderIconComponent />
-          <HeaderIconComponent />
-          <HeaderIconComponent />
+          <HeaderIconComponent
+            icon={<FaLocationDot />}
+            heading="1700 Palm Beach Lakes Blvd, Suite 820"
+            tagline="West Palm Beach, FL"
+          />
+          <HeaderIconComponent
+            icon={<IoCall />}
+            heading="(800) 341-2684"
+            tagline="Call Toll Free"
+          />
+          <HeaderIconComponent
+            icon={<FaQuestion />}
+            heading="Contact Us"
+            tagline="Online Inquires 24/7"
+          />
         </div>
       </header>
-      <div className="sticky top-0 z-10">
+      <div className="">
         <TopBar />
         <CategoriesList />
       </div>
@@ -29,15 +43,23 @@ const Header = () => {
 
 export default Header;
 
-function HeaderIconComponent() {
+function HeaderIconComponent({
+  heading,
+  tagline,
+  icon,
+}: {
+  heading: string;
+  tagline: string;
+  icon: any;
+}) {
   return (
     <div className="flex gap-2 items-center">
+      <div className="text-muted-foreground text-3xl">{icon}</div>
       <div>
-        <FaLocationDot />
-      </div>
-      <div>
-        <h4>1700 Palm Beach Lakes Blvd, Suite 820</h4>
-        <span>West Palm Beach, FL 33401</span>
+        <span className="text-mainB leading-[1] font-semibold text-[1rem] block">
+          {heading}
+        </span>
+        <span className="text-md text-muted-foreground">{tagline}</span>
       </div>
     </div>
   );
@@ -45,13 +67,13 @@ function HeaderIconComponent() {
 
 function TopBar({ classname }: { classname?: string }) {
   return (
-    <div
-      className={cn("flex justify-around  items-center bg-mainB ", classname)}
-    >
-      <TopBarHeading title="Destiny Aigbe" />
-      <TopBarHeading title="Privacy Policy" />
-      <TopBarHeading title="Terms of Service" />
-      <TopBarHeading title="Disclaimer" />
+    <div className="bg-mainB ">
+      <div className={cn("flex items-center narrow-container", classname)}>
+        <TopBarHeading title="Destiny Aigbe" />
+        <TopBarHeading title="Privacy Policy" />
+        <TopBarHeading title="Terms of Service" />
+        <TopBarHeading title="Disclaimer" />
+      </div>
     </div>
   );
 }
@@ -69,7 +91,7 @@ function TopBarHeading({ title }: { title: string }) {
 
 function CategoriesList() {
   return (
-    <div className="container flex justify-center py-2 bg-muted shadow-lg items-center gap-2">
+    <div className="flex justify-center py-2 bg-muted shadow-lg items-center gap-2">
       <CategoryAlphabet Alphabet="A" />
       <CategoryAlphabet Alphabet="B" />
       <CategoryAlphabet Alphabet="C" />
