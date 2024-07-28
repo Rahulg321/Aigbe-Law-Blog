@@ -68,20 +68,21 @@ function HeaderIconComponent({
 function TopBar({ classname }: { classname?: string }) {
   return (
     <div className="bg-mainB ">
-      <div className={cn("flex items-center narrow-container", classname)}>
-        <TopBarHeading title="Destiny Aigbe" />
-        <TopBarHeading title="Privacy Policy" />
-        <TopBarHeading title="Terms of Service" />
-        <TopBarHeading title="Disclaimer" />
+      <div className={cn("flex items-center big-container", classname)}>
+        <TopBarHeading title="Destiny Aigbe" link="/destiny-aigbe" />
+        <TopBarHeading title="About Firm" link="/about-firm" />
+        <TopBarHeading title="Privacy Policy" link="privacy-policy" />
+        <TopBarHeading title="Terms of Service" link="/terms-of-service" />
+        <TopBarHeading title="Disclaimer" link="/disclaimer" />
       </div>
     </div>
   );
 }
 
-function TopBarHeading({ title }: { title: string }) {
+function TopBarHeading({ title, link }: { title: string; link: string }) {
   return (
     <Link
-      href={"*"}
+      href={link}
       className="hover:bg-accentB p-4 transition duration-100 ease-in-out"
     >
       <h5 className="text-white">{title}</h5>
@@ -91,7 +92,7 @@ function TopBarHeading({ title }: { title: string }) {
 
 function CategoriesList() {
   return (
-    <div className="flex justify-center py-2 bg-muted shadow-lg items-center gap-2">
+    <div className="flex justify-center py-2 bg-muted shadow-lg items-center gap-4">
       <CategoryAlphabet Alphabet="A" />
       <CategoryAlphabet Alphabet="B" />
       <CategoryAlphabet Alphabet="C" />

@@ -1,3 +1,4 @@
+import BlogCard from "@/components/BlogCard";
 import HeroSection from "@/components/sections/HeroSection";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,15 @@ export default async function HomePage() {
   return (
     <React.Fragment>
       <HeroSection />
-      <NewsletterSection />
+      <section className="container block-space space-y-4 md:space-y-6 lg:space-y-8">
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+        <NewsletterSection />
+      </section>
     </React.Fragment>
   );
 }

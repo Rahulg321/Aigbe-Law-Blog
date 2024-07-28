@@ -1,11 +1,11 @@
 import { UserIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { FaInstagram } from "react-icons/fa6";
+import { FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { FaCircleUser } from "react-icons/fa6";
 import { FaSun } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaFacebookSquare, FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import Image from "next/image";
 import Logo from "@/public/white_logo.png";
@@ -45,10 +45,10 @@ const Footer = () => {
       </div>
       <div className="text-white flex flex-col gap-2 justify-center items-center p-6">
         <div className="flex gap-4">
-          <SocialMediaIconLink icon={<FaInstagram />} />
-          <SocialMediaIconLink icon={<FaInstagram />} />
-          <SocialMediaIconLink icon={<FaInstagram />} />
-          <SocialMediaIconLink icon={<FaInstagram />} />
+          <SocialMediaIconLink icon={<FaInstagram />} link="" />
+          <SocialMediaIconLink icon={<FaLinkedin />} link="" />
+          <SocialMediaIconLink icon={<FaXTwitter />} link="" />
+          <SocialMediaIconLink icon={<FaFacebookSquare />} link="" />
         </div>
         {/* write span tag for copyrights reserved */}
         <span>Copyright 2023. All Rights Reserved.</span>
@@ -59,10 +59,10 @@ const Footer = () => {
 
 export default Footer;
 
-function SocialMediaIconLink({ icon }: { icon: any }) {
+function SocialMediaIconLink({ icon, link }: { icon: any; link: string }) {
   return (
-    <Link href={"*"} className="p-2 rounded-full border-gray-400 border-2">
-      <div>{icon}</div>
+    <Link href={link} className="p-2 rounded-full border-gray-400 border-2">
+      <div className="text-xl md:text-2xl">{icon}</div>
     </Link>
   );
 }
