@@ -7,6 +7,7 @@ import CategoryAlphabet from "./CategoryAlphabet";
 import Link from "next/link";
 import { IoCall } from "react-icons/io5";
 import { FaQuestion } from "react-icons/fa";
+import MobileNavSheet from "@/components/MobileNavSheet";
 
 const Header = () => {
   return (
@@ -67,8 +68,10 @@ function HeaderIconComponent({
 
 function TopBar({ classname }: { classname?: string }) {
   return (
-    <div className="bg-mainB ">
-      <div className={cn("flex items-center big-container", classname)}>
+    <div className="bg-mainB">
+      <div
+        className={cn("hidden lg:flex items-center big-container", classname)}
+      >
         <TopBarHeading title="Home" link="/" />
         <TopBarHeading title="Destiny Aigbe" link="/destiny-aigbe" />
         <TopBarHeading title="About Firm" link="/about-firm" />
@@ -76,6 +79,10 @@ function TopBar({ classname }: { classname?: string }) {
         <TopBarHeading title="Terms of Service" link="/terms-of-service" />
         <TopBarHeading title="Disclaimer" link="/disclaimer" />
         <TopBarHeading title="Contact Us" link="/contact-us" />
+      </div>
+      <div className="big-container flex items-center justify-between lg:hidden p-4">
+        <h3 className="text-white">Aigbe Law Blogs</h3>
+        <MobileNavSheet />
       </div>
     </div>
   );
@@ -94,31 +101,34 @@ function TopBarHeading({ title, link }: { title: string; link: string }) {
 
 function CategoriesList() {
   return (
-    <div className="hidden md:flex justify-center py-2 bg-muted shadow-lg items-center gap-4">
-      <CategoryAlphabet Alphabet="A" />
-      <CategoryAlphabet Alphabet="B" />
-      <CategoryAlphabet Alphabet="C" />
-      <CategoryAlphabet Alphabet="D" />
-      <CategoryAlphabet Alphabet="E" />
-      <CategoryAlphabet Alphabet="F" />
-      <CategoryAlphabet Alphabet="G" />
-      <CategoryAlphabet Alphabet="H" />
-      <CategoryAlphabet Alphabet="I" />
-      <CategoryAlphabet Alphabet="J" />
-      <CategoryAlphabet Alphabet="K" />
-      <CategoryAlphabet Alphabet="L" />
-      <CategoryAlphabet Alphabet="M" />
-      <CategoryAlphabet Alphabet="N" />
-      <CategoryAlphabet Alphabet="O" />
-      <CategoryAlphabet Alphabet="P" />
-      <CategoryAlphabet Alphabet="Q" />
-      <CategoryAlphabet Alphabet="R" />
-      <CategoryAlphabet Alphabet="S" />
-      <CategoryAlphabet Alphabet="T" />
-      <CategoryAlphabet Alphabet="U" />
-      <CategoryAlphabet Alphabet="V" />
-      <CategoryAlphabet Alphabet="W" />
-      <CategoryAlphabet Alphabet="X" />
+    <div>
+      <div className="hidden lg:flex justify-center py-2 bg-muted shadow-lg items-center gap-4">
+        <CategoryAlphabet Alphabet="A" />
+        <CategoryAlphabet Alphabet="B" />
+        <CategoryAlphabet Alphabet="C" />
+        <CategoryAlphabet Alphabet="D" />
+        <CategoryAlphabet Alphabet="E" />
+        <CategoryAlphabet Alphabet="F" />
+        <CategoryAlphabet Alphabet="G" />
+        <CategoryAlphabet Alphabet="H" />
+        <CategoryAlphabet Alphabet="I" />
+        <CategoryAlphabet Alphabet="J" />
+        <CategoryAlphabet Alphabet="K" />
+        <CategoryAlphabet Alphabet="L" />
+        <CategoryAlphabet Alphabet="M" />
+        <CategoryAlphabet Alphabet="N" />
+        <CategoryAlphabet Alphabet="O" />
+        <CategoryAlphabet Alphabet="P" />
+        <CategoryAlphabet Alphabet="Q" />
+        <CategoryAlphabet Alphabet="R" />
+        <CategoryAlphabet Alphabet="S" />
+        <CategoryAlphabet Alphabet="T" />
+        <CategoryAlphabet Alphabet="U" />
+        <CategoryAlphabet Alphabet="V" />
+        <CategoryAlphabet Alphabet="W" />
+        <CategoryAlphabet Alphabet="X" />
+      </div>
+      <div></div>
     </div>
   );
 }

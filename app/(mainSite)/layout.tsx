@@ -4,6 +4,10 @@ import { Inter as FontSans, Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CategoryNavSheet from "@/components/CategoryNavSheet";
+import { CATEGORY_QUERYResult } from "@/sanity/types";
+import { sanityFetch } from "@/sanity/client";
+import { CATEGORY_QUERY } from "@/sanity/groq-queries";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -48,7 +52,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -63,6 +67,9 @@ export default function RootLayout({
         )}
       >
         <main className="parent-container">
+          <div className="fixed bottom-6 left-6 z-30 lg:hidden">
+            <CategoryNavSheet />
+          </div>
           <Header />
           {children}
           <Footer />

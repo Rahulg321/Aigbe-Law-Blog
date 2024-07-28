@@ -22,8 +22,8 @@ export default async function HomePage() {
     <React.Fragment>
       <HeroSection />
       <section className="container block-space">
-        <div className="grid grid-cols-3 gap-4">
-          <div className="col-span-2 space-y-4 md:space-y-6 lg:space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="col-span-2 space-y-6 lg:space-y-8">
             <h2>Latest Blogs</h2>
             {blogs.map((blog) => {
               return (
@@ -37,7 +37,7 @@ export default async function HomePage() {
               );
             })}
           </div>
-          <div>
+          <div className="hidden lg:block">
             <CategoriesList />
           </div>
         </div>
