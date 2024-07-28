@@ -2,22 +2,24 @@ import Link from "next/link";
 import React from "react";
 import { FaAngleDoubleRight } from "react-icons/fa";
 
-const BlogCard = () => {
+const BlogCard = ({
+  title,
+  excerpt,
+  slug,
+}: {
+  title: string;
+  excerpt: string;
+  slug: string;
+}) => {
   return (
-    <div className="">
-      <h3 className="text-mainB font-bold mb-2">Free Writing Prospectus</h3>
+    <article className="">
+      <h3 className="text-mainB font-bold mb-2">{title}</h3>
       <span className="text-accentB text-xl font-semibold">July 1, 2023</span>
-      <p className="text-muted-foreground text-lg md:text-xl mb-2">
-        I’m finding a lot of good segues recently – flowing from my discussion
-        on the definition and implications of shell company status in a reverse
-        merger (see HERE) is the topic of a free writing prospectus (“FWP”). In
-        particular, what is a free writing prospectus, when and how is it used,
-        and what companies are eligible for its use.
-      </p>
-      <Link className="text-mainB" href="#">
+      <p className="text-muted-foreground text-lg md:text-xl mb-2">{excerpt}</p>
+      <Link className="text-mainB" href={`/blog/${slug}`}>
         Read More <FaAngleDoubleRight className="inline h-4 w-4 ml-1" />
       </Link>
-    </div>
+    </article>
   );
 };
 

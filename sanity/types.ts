@@ -237,12 +237,16 @@ export type CATEGORY_QUERYResult = Array<{
   slug: Slug | null;
 }>;
 // Variable: BLOG_QUERY
-// Query: *[_type == "blog" && defined(slug.current)]{_id, title, "slug":slug.current, "image":featuredImage}|order(date desc)
+// Query: *[_type == "blog" && defined(slug.current)]
 export type BLOG_QUERYResult = Array<{
   _id: string;
-  title: string | null;
-  slug: string | null;
-  image: {
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  featuredImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -252,8 +256,60 @@ export type BLOG_QUERYResult = Array<{
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  } | null;
+  };
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+  publishDate?: string;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  tags?: Array<string>;
+  excerpt?: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
 }>;
+// Variable: SINGLE_BLOG_METADATA_QUERY
+// Query: *[_type == "blog" && slug.current == $slug][0]{  _id,  metaTitle,  metaDescription,}
+export type SINGLE_BLOG_METADATA_QUERYResult = {
+  _id: string;
+  metaTitle: null;
+  metaDescription: null;
+} | null;
 // Variable: SINGLE_BLOG_QUERY
 // Query: *[_type == "blog" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  "image": featuredImage,  "author": author->name,  "authorImage": author->image,  publishDate,  categories[]->{    title,    slug  },  tags,  excerpt,  content[]{    ...,    _type == "image" => {      ...,      asset->{        _id,        url      }    }  }}
 export type SINGLE_BLOG_QUERYResult = {

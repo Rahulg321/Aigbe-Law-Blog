@@ -18,11 +18,6 @@ export default async function HomePage() {
     tags: ["blog"],
   });
 
-  const categories = await sanityFetch<CATEGORY_QUERYResult>({
-    query: CATEGORY_QUERY,
-    tags: ["category"],
-  });
-
   return (
     <React.Fragment>
       <HeroSection />
@@ -30,12 +25,16 @@ export default async function HomePage() {
         <div className="grid grid-cols-3 gap-4">
           <div className="col-span-2 space-y-4 md:space-y-6 lg:space-y-8">
             <h2>Latest Blogs</h2>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            {blogs.map((blog) => {
+              return (
+                <BlogCard
+                  key={blog._id}
+                  title={blog.title as string}
+                  excerpt={blog.excerpt as string}
+                  slug={blog.slug?.current as string}
+                />
+              );
+            })}
           </div>
           <div>
             <CategoriesList />

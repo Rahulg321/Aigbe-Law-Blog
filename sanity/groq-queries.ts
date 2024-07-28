@@ -5,7 +5,15 @@ export const AUTHOR_QUERY = groq`*[_type == "author" && defined(slug.current)]{_
 
 export const CATEGORY_QUERY = groq`*[_type == "category" && defined(slug.current)]{_id, title, slug}|order(date desc)`;
 
-export const BLOG_QUERY = groq`*[_type == "blog" && defined(slug.current)]{_id, title, "slug":slug.current, "image":featuredImage}|order(date desc)`;
+export const BLOG_QUERY = groq`*[_type == "blog" && defined(slug.current)]`;
+
+export const SINGLE_BLOG_METADATA_QUERY = groq`
+*[_type == "blog" && slug.current == $slug][0]{
+  _id,
+  metaTitle,
+  metaDescription,
+}
+`;
 
 export const SINGLE_BLOG_QUERY = groq`
 *[_type == "blog" && slug.current == $slug][0]{
