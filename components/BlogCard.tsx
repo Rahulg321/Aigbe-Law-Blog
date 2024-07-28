@@ -13,7 +13,9 @@ const BlogCard = ({
 }) => {
   return (
     <article className="">
-      <h3 className="text-mainB font-bold mb-2">{title}</h3>
+      <Link href={`/blog/${slug}`}>
+        <h3 className="text-mainB font-bold mb-2">{title}</h3>
+      </Link>
       <span className="text-accentB text-xl font-semibold">July 1, 2023</span>
       <p className="text-muted-foreground text-lg md:text-xl mb-2">{excerpt}</p>
       <Link className="text-mainB" href={`/blog/${slug}`}>

@@ -13,6 +13,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Separator } from "@/components/ui/separator";
 import CategoriesList from "@/components/CategoriesList";
+import { FaPenNib } from "react-icons/fa6";
+import { TimerIcon } from "lucide-react";
 
 type Params = {
   slug: string;
@@ -31,12 +33,29 @@ const page = async ({ params }: { params: Params }) => {
     return notFound();
   }
 
+  const date = new Date(blogpost.publishDate as string);
+
+  // Format the date using options for locale, day, month, and year
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   return (
     <section className="block-space container">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <article className="col-span-2 text-pretty">
-          <h1 className="text-mainB">{blogpost?.title}</h1>
-          <Separator className="h-[3px] my-[1em] bg-accentB" />
+          <div className="space-y-4">
+            <h2 className="text-mainB ">{blogpost?.title}</h2>
+            <h3 className="flex items-center text-accentB">
+              <FaPenNib className="mr-2" /> Author: Destiny Aigbe
+            </h3>
+            <h4 className="flex items-center text-accentB">
+              <TimerIcon /> {formattedDate}
+            </h4>
+          </div>
+          <Separator className="h-[4px] my-[1em] bg-muted" />
           {blogpost?.content && (
             <div className="prose max-w-none w-full">
               <PortableText value={blogpost?.content} />
