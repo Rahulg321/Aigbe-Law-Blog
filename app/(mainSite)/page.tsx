@@ -32,6 +32,7 @@ export default async function HomePage() {
                   title={blog.title as string}
                   excerpt={blog.excerpt as string}
                   slug={blog.slug?.current as string}
+                  createdAt={blog._createdAt as string}
                 />
               );
             })}

@@ -236,6 +236,73 @@ export type CATEGORY_QUERYResult = Array<{
   title: string | null;
   slug: Slug | null;
 }>;
+// Variable: BLOG_BY_CATEGORY
+// Query: *[_type == "blog" && category->slug.current == $slug]
+export type BLOG_BY_CATEGORYResult = Array<{
+  _id: string;
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  featuredImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+  publishDate?: string;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  tags?: Array<string>;
+  excerpt?: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+}>;
 // Variable: BLOG_QUERY
 // Query: *[_type == "blog" && defined(slug.current)]
 export type BLOG_QUERYResult = Array<{
@@ -303,6 +370,13 @@ export type BLOG_QUERYResult = Array<{
     _key: string;
   }>;
 }>;
+// Variable: CATEGORY_BY_SLUG
+// Query: *[_type == "category" && slug.current == $slug][0]{  _id,    title,  description}
+export type CATEGORY_BY_SLUGResult = {
+  _id: string;
+  title: string | null;
+  description: null;
+} | null;
 // Variable: SINGLE_BLOG_METADATA_QUERY
 // Query: *[_type == "blog" && slug.current == $slug][0]{  _id,  metaTitle,  metaDescription,}
 export type SINGLE_BLOG_METADATA_QUERYResult = {
@@ -311,12 +385,16 @@ export type SINGLE_BLOG_METADATA_QUERYResult = {
   metaDescription: null;
 } | null;
 // Variable: SINGLE_BLOG_QUERY
-// Query: *[_type == "blog" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  "image": featuredImage,  "author": author->name,  "authorImage": author->image,  publishDate,  categories[]->{    title,    slug  },  tags,  excerpt,  content[]{    ...,    _type == "image" => {      ...,      asset->{        _id,        url      }    }  }}
+// Query: *[_type == "blog" && slug.current == $slug][0]{  ...,  metaTitle,  metaDescription,}
 export type SINGLE_BLOG_QUERYResult = {
   _id: string;
-  title: string | null;
-  slug: string | null;
-  image: {
+  _type: "blog";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  featuredImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -326,17 +404,24 @@ export type SINGLE_BLOG_QUERYResult = {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
-  } | null;
-  author: null;
-  authorImage: null;
-  publishDate: string | null;
-  categories: Array<{
-    title: string | null;
-    slug: Slug | null;
-  }> | null;
-  tags: Array<string> | null;
-  excerpt: string | null;
-  content: Array<{
+  };
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "author";
+  };
+  publishDate?: string;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
+  tags?: Array<string>;
+  excerpt?: string;
+  content?: Array<{
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -354,13 +439,17 @@ export type SINGLE_BLOG_QUERYResult = {
     _type: "block";
     _key: string;
   } | {
-    asset: {
-      _id: string;
-      url: string | null;
-    } | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
     _key: string;
-  }> | null;
+  }>;
+  metaTitle: null;
+  metaDescription: null;
 } | null;

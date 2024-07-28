@@ -64,12 +64,12 @@ const BlogSchema = defineType({
     }),
 
     defineField({
-      name: "author",
+      name: "category",
       group: "descriptive",
-      title: "Author",
+      title: "Categories",
       type: "reference",
-      to: { type: "author" },
-      validation: (Rule) => Rule.required(),
+      to: { type: "category" },
+      validation: (Rule) => Rule.required().error("Category required"),
     }),
 
     defineField({
@@ -87,15 +87,6 @@ const BlogSchema = defineType({
       group: "descriptive",
       type: "datetime",
       fieldset: "dates",
-    }),
-
-    defineField({
-      name: "categories",
-      group: "descriptive",
-      title: "Categories",
-      type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
-      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -159,7 +150,8 @@ const BlogSchema = defineType({
       validation: (Rule) =>
         Rule.required()
           .max(60)
-          .warning("Meta titles should be under 60 characters"),
+          .warning("Meta titles should be under 60 characters")
+          .error("Meta titles are required"),
     }),
 
     defineField({
@@ -172,21 +164,15 @@ const BlogSchema = defineType({
         Rule.required()
           .min(50)
           .max(160)
-          .warning("Meta descriptions should be between 50-160 characters"),
+          .warning("Meta descriptions should be between 50-160 characters")
+          .error("Meta description is required"),
     }),
   ],
   preview: {
     select: {
       title: "title",
-      categories: "categories",
-      image: "featuredImage",
-    },
-    prepare: ({ title, categories, image }) => {
-      return {
-        title,
-        subtitle: categories[0].title,
-        media: image,
-      };
+      subtitle: "category.title",
+      media: "featuredImage",
     },
   },
 });

@@ -5,7 +5,20 @@ export const AUTHOR_QUERY = groq`*[_type == "author" && defined(slug.current)]{_
 
 export const CATEGORY_QUERY = groq`*[_type == "category" && defined(slug.current)]{_id, title, slug}|order(date desc)`;
 
+// write a query to fetch blogs by category
+export const BLOG_BY_CATEGORY = groq`
+*[_type == "blog" && category->slug.current == $slug]
+`;
+
 export const BLOG_QUERY = groq`*[_type == "blog" && defined(slug.current)]`;
+
+export const CATEGORY_BY_SLUG = groq`
+*[_type == "category" && slug.current == $slug][0]{
+  _id,  
+  title,
+  description
+}
+`;
 
 export const SINGLE_BLOG_METADATA_QUERY = groq`
 *[_type == "blog" && slug.current == $slug][0]{
@@ -17,28 +30,8 @@ export const SINGLE_BLOG_METADATA_QUERY = groq`
 
 export const SINGLE_BLOG_QUERY = groq`
 *[_type == "blog" && slug.current == $slug][0]{
-  _id,
-  title,
-  "slug": slug.current,
-  "image": featuredImage,
-  "author": author->name,
-  "authorImage": author->image,
-  publishDate,
-  categories[]->{
-    title,
-    slug
-  },
-  tags,
-  excerpt,
-  content[]{
-    ...,
-    _type == "image" => {
-      ...,
-      asset->{
-        _id,
-        url
-      }
-    }
-  }
+  ...,
+  metaTitle,
+  metaDescription,
 }
 `;

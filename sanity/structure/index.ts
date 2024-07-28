@@ -30,5 +30,4 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("blog").title("Blogs").icon(DocumentIcon),
       S.divider(),
       S.documentTypeListItem("category").title("Category").icon(TagIcon),
-      S.documentTypeListItem("author").title("Authors").icon(UsersIcon),
     ]);

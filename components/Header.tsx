@@ -13,9 +13,9 @@ const Header = () => {
     <div className="">
       <header className="">
         <div className="flex justify-between block-space-mini items-center container">
-          <div>
+          <Link href="/">
             <Image src={Logo} alt="" width={350} height={100} />
-          </div>
+          </Link>
           <HeaderIconComponent
             icon={<FaLocationDot />}
             heading="1700 Palm Beach Lakes Blvd, Suite 820"
@@ -53,7 +53,7 @@ function HeaderIconComponent({
   icon: any;
 }) {
   return (
-    <div className="flex gap-2 items-center">
+    <div className="md:flex gap-2 items-center hidden">
       <div className="text-muted-foreground text-3xl">{icon}</div>
       <div>
         <span className="text-mainB leading-[1] font-semibold text-[1rem] block">
@@ -69,6 +69,7 @@ function TopBar({ classname }: { classname?: string }) {
   return (
     <div className="bg-mainB ">
       <div className={cn("flex items-center big-container", classname)}>
+        <TopBarHeading title="Home" link="/" />
         <TopBarHeading title="Destiny Aigbe" link="/destiny-aigbe" />
         <TopBarHeading title="About Firm" link="/about-firm" />
         <TopBarHeading title="Privacy Policy" link="privacy-policy" />
@@ -93,7 +94,7 @@ function TopBarHeading({ title, link }: { title: string; link: string }) {
 
 function CategoriesList() {
   return (
-    <div className="flex justify-center py-2 bg-muted shadow-lg items-center gap-4">
+    <div className="hidden md:flex justify-center py-2 bg-muted shadow-lg items-center gap-4">
       <CategoryAlphabet Alphabet="A" />
       <CategoryAlphabet Alphabet="B" />
       <CategoryAlphabet Alphabet="C" />
