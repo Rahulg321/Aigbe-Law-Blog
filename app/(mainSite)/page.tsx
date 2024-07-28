@@ -1,4 +1,5 @@
 import BlogCard from "@/components/BlogCard";
+import CategoriesList from "@/components/CategoriesList";
 import HeroSection from "@/components/sections/HeroSection";
 import NewsletterSection from "@/components/sections/NewsletterSection";
 import { Button } from "@/components/ui/button";
@@ -25,15 +26,23 @@ export default async function HomePage() {
   return (
     <React.Fragment>
       <HeroSection />
-      <section className="container block-space space-y-4 md:space-y-6 lg:space-y-8">
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <NewsletterSection />
+      <section className="container block-space">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-2 space-y-4 md:space-y-6 lg:space-y-8">
+            <h2>Latest Blogs</h2>
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+            <BlogCard />
+          </div>
+          <div>
+            <CategoriesList />
+          </div>
+        </div>
       </section>
+      <NewsletterSection />
     </React.Fragment>
   );
 }

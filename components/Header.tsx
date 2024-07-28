@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className="">
       <header className="">
-        <div className="flex gap-4 block-space-mini items-center big-container">
+        <div className="flex justify-between block-space-mini items-center container">
           <div>
             <Image src={Logo} alt="" width={350} height={100} />
           </div>
@@ -74,6 +74,7 @@ function TopBar({ classname }: { classname?: string }) {
         <TopBarHeading title="Privacy Policy" link="privacy-policy" />
         <TopBarHeading title="Terms of Service" link="/terms-of-service" />
         <TopBarHeading title="Disclaimer" link="/disclaimer" />
+        <TopBarHeading title="Contact Us" link="/contact-us" />
       </div>
     </div>
   );

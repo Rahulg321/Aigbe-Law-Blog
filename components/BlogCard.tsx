@@ -5,8 +5,8 @@ import { FaAngleDoubleRight } from "react-icons/fa";
 const BlogCard = () => {
   return (
     <div className="">
-      <h3 className="text-mainB font-bold">Free Writing Prospectus</h3>
-      <span>July 1, 2023</span>
+      <h3 className="text-mainB font-bold mb-2">Free Writing Prospectus</h3>
+      <span className="text-accentB text-xl font-semibold">July 1, 2023</span>
       <p className="text-muted-foreground text-lg md:text-xl mb-2">
         I’m finding a lot of good segues recently – flowing from my discussion
         on the definition and implications of shell company status in a reverse
