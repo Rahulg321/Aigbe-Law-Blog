@@ -1,17 +1,30 @@
 import BlogCard from "@/components/BlogCard";
+import BlogPagination from "@/components/BlogPagination";
 import CategoriesList from "@/components/CategoriesList";
 import { Button } from "@/components/ui/button";
 import { sanityFetch } from "@/sanity/client";
-import { BLOG_BY_CATEGORY, CATEGORY_BY_SLUG } from "@/sanity/groq-queries";
-import { BLOG_BY_CATEGORYResult, CATEGORY_BY_SLUGResult } from "@/sanity/types";
+import {
+  CATEGORY_BY_SLUG,
+  FETCH_ALL_BLOGS_BY_CATEGORY,
+  NUMBERED_BLOG_CATEGORY_QUERY,
+  PAGINATED_BLOG_CATEGORY_QUERY,
+} from "@/sanity/groq-queries";
+import {
+  CATEGORY_BY_SLUGResult,
+  FETCH_ALL_BLOGS_BY_CATEGORYResult,
+  NUMBERED_BLOG_CATEGORY_QUERYResult,
+  PAGINATED_BLOG_CATEGORY_QUERYResult,
+} from "@/sanity/types";
 import Link from "next/link";
 import React from "react";
 
-type Params = {
-  slug: string;
-};
-
-const page = async ({ params }: { params: Params }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
   const currentCategory = await sanityFetch<CATEGORY_BY_SLUGResult>({
     query: CATEGORY_BY_SLUG,
     params: {
@@ -20,22 +33,20 @@ const page = async ({ params }: { params: Params }) => {
     tags: ["category"],
   });
 
-  const blogs = await sanityFetch<BLOG_BY_CATEGORYResult>({
-    query: BLOG_BY_CATEGORY,
+  const blogs = await sanityFetch<FETCH_ALL_BLOGS_BY_CATEGORYResult>({
+    query: FETCH_ALL_BLOGS_BY_CATEGORY,
     params: {
       slug: params.slug,
     },
     tags: ["blog"],
   });
 
-  console.log("blogs for category are ", blogs);
-
   return (
     <section className="container block-space">
       <div className="grid grid-cols-3 gap-4">
         <div className="col-span-2 space-y-4 md:space-y-6 lg:space-y-8">
           <h2>Category: {currentCategory?.title as string}</h2>
-          {blogs &&
+          {blogs.length > 0 &&
             blogs.map((blog) => {
               return (
                 <BlogCard
@@ -43,7 +54,7 @@ const page = async ({ params }: { params: Params }) => {
                   title={blog.title as string}
                   excerpt={blog.excerpt as string}
                   slug={blog.slug?.current as string}
-                  createdAt={blog._createdAt as string}
+                  createdAt={blog.publishDate as string}
                 />
               );
             })}

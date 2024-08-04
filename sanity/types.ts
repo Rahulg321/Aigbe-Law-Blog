@@ -304,6 +304,120 @@ export type BLOG_BY_CATEGORYResult = Array<{
     _key: string;
   }>;
 }>;
+// Variable: NUMBERED_BLOG_CATEGORY_QUERY
+// Query: *[_type == "blog" && category->slug.current == $slug] | order(_id) [0...3] {  _id, title, slug, publishDate, excerpt, content}
+export type NUMBERED_BLOG_CATEGORY_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  publishDate: string | null;
+  excerpt: string | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
+}>;
+// Variable: FETCH_ALL_BLOGS_BY_CATEGORY
+// Query: *[_type == "blog" && category->slug.current == $slug] | order(_id) {  _id, title, slug, publishDate, excerpt, content}
+export type FETCH_ALL_BLOGS_BY_CATEGORYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  publishDate: string | null;
+  excerpt: string | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
+}>;
+// Variable: PAGINATED_BLOG_CATEGORY_QUERY
+// Query: *[_type == "blog" && _id > $lastId && category->slug.current == $slug] | order(_id) [0...3] {  _id, title, slug, publishDate, excerpt, content}
+export type PAGINATED_BLOG_CATEGORY_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  publishDate: string | null;
+  excerpt: string | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
+}>;
 // Variable: BLOG_QUERY
 // Query: *[_type == "blog" && defined(slug.current)]
 export type BLOG_QUERYResult = Array<{

@@ -149,9 +149,9 @@ const BlogSchema = defineType({
       description: "Enter the meta title for SEO purposes",
       validation: (Rule) =>
         Rule.required()
+          .min(40)
           .max(60)
-          .warning("Meta titles should be under 60 characters")
-          .error("Meta titles are required"),
+          .warning("Write a meta title for the blog between 40-60 characters"),
     }),
 
     defineField({
@@ -162,10 +162,9 @@ const BlogSchema = defineType({
       description: "Enter the meta description for SEO purposes",
       validation: (Rule) =>
         Rule.required()
-          .min(50)
-          .max(160)
-          .warning("Meta descriptions should be between 50-160 characters")
-          .error("Meta description is required"),
+          .min(60)
+          .max(120)
+          .warning("Write a meta title for the blog between 60-120 characters"),
     }),
   ],
   preview: {

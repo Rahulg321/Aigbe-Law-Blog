@@ -10,6 +10,18 @@ export const BLOG_BY_CATEGORY = groq`
 *[_type == "blog" && category->slug.current == $slug]
 `;
 
+export const NUMBERED_BLOG_CATEGORY_QUERY = groq`*[_type == "blog" && category->slug.current == $slug] | order(_id) [0...3] {
+  _id, title, slug, publishDate, excerpt, content
+}`;
+
+export const FETCH_ALL_BLOGS_BY_CATEGORY = groq`*[_type == "blog" && category->slug.current == $slug] | order(_id) {
+  _id, title, slug, publishDate, excerpt, content
+}`;
+
+export const PAGINATED_BLOG_CATEGORY_QUERY = groq`*[_type == "blog" && _id > $lastId && category->slug.current == $slug] | order(_id) [0...3] {
+  _id, title, slug, publishDate, excerpt, content
+}`;
+
 export const BLOG_QUERY = groq`*[_type == "blog" && defined(slug.current)]`;
 
 export const CATEGORY_BY_SLUG = groq`
