@@ -419,7 +419,7 @@ export type PAGINATED_BLOG_CATEGORY_QUERYResult = Array<{
   }> | null;
 }>;
 // Variable: BLOG_QUERY
-// Query: *[_type == "blog" && defined(slug.current)]
+// Query: *[_type == "blog" && defined(slug.current)][0...10]
 export type BLOG_QUERYResult = Array<{
   _id: string;
   _type: "blog";

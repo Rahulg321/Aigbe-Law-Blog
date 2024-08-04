@@ -22,7 +22,7 @@ export const PAGINATED_BLOG_CATEGORY_QUERY = groq`*[_type == "blog" && _id > $la
   _id, title, slug, publishDate, excerpt, content
 }`;
 
-export const BLOG_QUERY = groq`*[_type == "blog" && defined(slug.current)]`;
+export const BLOG_QUERY = groq`*[_type == "blog" && defined(slug.current)][0...10]`;
 
 export const CATEGORY_BY_SLUG = groq`
 *[_type == "category" && slug.current == $slug][0]{
